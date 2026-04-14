@@ -1,0 +1,29 @@
+{% extends 'complaints/base.html' %}
+{% block content %}
+<div class="text-center mb-5">
+    <h2 class="fw-bold">Welcome to the Complaint Management System</h2>
+    <p class="text-muted">Submit and track your college complaints easily</p>
+    <a href="{% url 'submit_complaint' %}" class="btn btn-danger btn-lg me-2">Submit Complaint</a>
+    <a href="{% url 'complaint_list' %}" class="btn btn-outline-secondary btn-lg">View Complaints</a>
+</div>
+<div class="row text-center">
+    <div class="col-md-4">
+        <div class="card p-4 mb-3">
+            <h1 class="fw-bold text-primary">{{ total }}</h1>
+            <p>Total Complaints</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-4 mb-3">
+            <h1 class="fw-bold text-warning">{{ pending }}</h1>
+            <p>Pending</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-4 mb-3">
+            <h1 class="fw-bold text-success">{{ resolved }}</h1>
+            <p>Resolved</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'complaints/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card p-4">
+            <h4 class="mb-4 fw-bold">📝 Submit a Complaint</h4>
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger small">{{ field.errors.0 }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-danger w-100">Submit Complaint</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

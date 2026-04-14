@@ -1,0 +1,56 @@
+{% extends 'complaints/base.html' %}
+{% block content %}
+<h4 class="fw-bold mb-3">📋 All Complaints</h4>
+<form method="GET" class="mb-3 d-flex gap-2">
+    <select name="status" class="form-select w-auto">
+        <option value="">All Status</option>
+        <option value="Pending" {% if status_filter == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="In Progress" {% if status_filter == 'In Progress' %}selected{% endif %}>In Progress</option>
+        <option value="Resolved" {% if status_filter == 'Resolved' %}selected{% endif %}>Resolved</option>
+    </select>
+    <button type="submit" class="btn btn-secondary">Filter</button>
+</form>
+<div class="table-responsive">
+<table class="table table-bordered table-hover bg-white">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Student</th>
+            <th>Enrollment</th>
+            <th>Department</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in complaints %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ c.student_name }}</td>
+            <td>{{ c.enrollment_no }}</td>
+            <td>{{ c.department }}</td>
+            <td>{{ c.category }}</td>
+            <td>
+                {% if c.status == 'Pending' %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                {% elif c.status == 'In Progress' %}
+                    <span class="badge bg-info">In Progress</span>
+                {% else %}
+                    <span class="badge bg-success">Resolved</span>
+                {% endif %}
+            </td>
+            <td>{{ c.submitted_at|date:"d M Y" }}</td>
+            <td>
+                <a href="{% url 'complaint_detail' c.pk %}" class="btn btn-sm btn-primary">View</a>
+                <a href="{% url 'delete_complaint' c.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this complaint?')">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8" class="text-center text-muted">No complaints found.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

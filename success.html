@@ -1,0 +1,9 @@
+{% extends 'complaints/base.html' %}
+{% block content %}
+<div class="text-center mt-5">
+    <h2 class="text-success fw-bold">✅ Complaint Submitted Successfully!</h2>
+    <p class="text-muted">Your complaint has been recorded. The admin will review it shortly.</p>
+    <a href="{% url 'home' %}" class="btn btn-danger me-2">Go Home</a>
+    <a href="{% url 'complaint_list' %}" class="btn btn-outline-dark">View All Complaints</a>
+</div>
+{% endblock %}
